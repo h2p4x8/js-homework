@@ -31,5 +31,21 @@
       </div>
     </div>
   </section>
+  <script>
+    let searchElement = document.getElementById('slider');
+    const sliders = [
+      'i/airmax-jump.png',
+      'i/airmax-on-foot.png',
+      'i/airmax-playground.png',
+      'i/airmax-top-view.png',
+      'i/airmax.png'
+    ];
+
+    let i = 0;
+    setInterval(() => {
+      searchElement.src = sliders[i];
+      i === sliders.length - 1 ? i = 0 : i++;
+      }, 5000)
+  </script>
 </body>
 </html>
