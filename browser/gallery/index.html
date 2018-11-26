@@ -35,5 +35,37 @@
       </ul>
     </div>
   </article>
+  <script>
+    const gallery = [
+      'i/breuer-building.jpg',
+      'i/guggenheim-museum.jpg',
+      'i/headquarters.jpg',
+      'i/IAC.jpg',
+      'i/new-museum.jpg'
+    ];
+    let searchElement = document.getElementById('currentPhoto');
+    let prev =  document.getElementById('prevPhoto');
+    let next = document.getElementById('nextPhoto');
+
+    let i = 0;
+    searchElement.src = gallery[i];
+    next.onclick = function() {
+      if (i < gallery.length - 1) {
+        i++;
+      } else {
+        i = 0;
+      }
+      searchElement.src = gallery[i];
+    }
+
+    prev.onclick = function() {
+      if (i <= 0) {
+        i = (gallery.length - 1)
+      } else {
+        i--;
+      }
+      searchElement.src = gallery[i];
+    }
+  </script>
 </body>
 </html>
