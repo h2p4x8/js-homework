@@ -5,67 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="viewport" content="width=1280">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Галерея</title>
+  <title>Слайдер</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <article class="article-block">
-    <h2 class="article-header">Misplaced New York</h2>
-    <p class="article-description">
-      Eleven New York City landmarks have been misplaced, their current location unknown. Photographs of unclear origin appear to show them scattered across the globe – on sand dunes, mud flats, “lunar” plains, and rocky beaches. Nobody knows exactly what happened or why. Did they act of their own volition? Was there foulplay involved? What does it all mean? Stories trickle in from the future, from architects, online reviewers, and the buildings themselves, but these only add to the confusion. Your curiosity and help is much appreciated.
-    </p>
-
-    <div class="article-gallery">
-      <img id="currentPhoto" src="i/spinner.gif" alt="">
-      <button id="prevPhoto">Назад</button>
-      <button id="nextPhoto">Вперед</button>
+  <section class="product-item">
+    <div class="product-gallery">
+      <img src="i/spinner.gif" alt="" id="slider">
     </div>
+    <div class="product-data">
+      <p class="product-firm">Nike</p>
+      <h2 class="product-name">AIR MAX TAVAS SD</h2>
+      <p class="product-price">160.00</p>
+      <p class="product-colors">Black/Pink Pow/Tour Yellow/White</p>
+      <p class="product-size">38-42</p>
+      <button class="buy-btn">add to cart</button>
 
-    <div class="article-text">
-      <ul class="list">
-        <li class="list-item">
-          Building the brutalist Breuer Building in the bloody boondocks was brutal. But worth it. Try making a clay pot inside a kiln, or basting a turkey that’s still in the oven. That’s what it was like at night, when the gnats crawled out of every little crack in the ground and kamikaze-attacked our eyeballs. I honestly don’t remember how we got the concrete on site. Mules? It was all such a blur. There’s only one window because the glass was so hot none of the guys would touch it. Nah, I’m just kidding. Breuer wanted it that way. I kind of like it; it’s like a cyclops eye or a barnacle or something.
-        </li>
-        <li class="list-item">
-          Guggenheim museums began sprouting across the globe, from the Basque Country to faraway Dubai, until there was nowhere else for them to grow. The board of directors sent agents to scour the earth for primitive lands that knew nothing of modern and contemporary art. At last word arrived of such a place. A check was written, migrant workers hired, and a museum rose from the volcanic mudflats of X. Ticket sales have been sluggish.
-        </li>
-        <li class="list-item">
-          John R. Bolton had been having the same dream for months. In it he’s wandering alone in the desert like a washed-up Lawrence of Arabia. He knows that if he doesn’t find water soon, the buzzards overhead will be picking flesh from his mustache by dawn. Then, in the distance, he spots an oasis. Summoning his last ounce of strength, he sprints toward it, kicking up sand in all directions, his white, tattered robes flapping in the breeze. He runs and runs, until something very strange and grotesque happens: The oasis morphs into the UN Headquarters in New York. Realizing that he’s doomed, former Ambassador Bolton falls to his knees. The desert sands quickly cover over him until there’s no trace left. And then he wakes up.
-        </li>
-      </ul>
+      <div class="product-info">
+        <p class="product-description">
+          The Nike Air Max Tavas SD Men's Shoe recalls the profile of the iconic running original with a Max Air unit in the heel and multi-surface Waffle outsole. A lightweight upper and gradient detail offer a comfortable fit and dynamic look.
+        </p>
+        <p class="product-description">
+          Nike's revolutionary Air-Sole unit made its way into Nike footwear in the late '70s. In 1987, the Nike Air Max 1 debuted with visible air in its heel, allowing fans more than just the feel of Air-Sole comfort
+        </p>
+      </div>
     </div>
-  </article>
+  </section>
   <script>
-    const gallery = [
-      'i/breuer-building.jpg',
-      'i/guggenheim-museum.jpg',
-      'i/headquarters.jpg',
-      'i/IAC.jpg',
-      'i/new-museum.jpg'
+    let searchElement = document.getElementById('slider');
+    const sliders = [
+      'i/airmax-jump.png',
+      'i/airmax-on-foot.png',
+      'i/airmax-playground.png',
+      'i/airmax-top-view.png',
+      'i/airmax.png'
     ];
-    let searchElement = document.getElementById('currentPhoto');
-    let prev =  document.getElementById('prevPhoto');
-    let next = document.getElementById('nextPhoto');
 
     let i = 0;
-    searchElement.src = gallery[i];
-    next.onclick = function() {
-      if (i < gallery.length - 1) {
-        i++;
-      } else {
-        i = 0;
-      }
-      searchElement.src = gallery[i];
-    }
-
-    prev.onclick = function() {
-      if (i <= 0) {
-        i = (gallery.length - 1)
-      } else {
-        i--;
-      }
-      searchElement.src = gallery[i];
-    }
+    searchElement.src = sliders[i];
+    setInterval(() => {
+      i === sliders.length - 1 ? i = 0 : i++;
+      searchElement.src = sliders[i];
+      }, 5000)
   </script>
 </body>
 </html>
