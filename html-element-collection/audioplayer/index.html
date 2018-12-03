@@ -38,5 +38,67 @@
   		</div>
   	</div>
   </div>
+<script>
+  'use strict';
+
+  const player = document.getElementsByTagName('audio')[0];
+  const controls = document.getElementsByClassName('controls')[0];
+  const title = controls.getElementsByClassName('title')[0];
+  const onOff = document.getElementsByClassName('mediaplayer')[0]
+
+  const songs = [
+    'mp3/LA Chill Tour.mp3',
+    'mp3/LA Fusion Jam.mp3',
+    'mp3/This is it band.mp3'
+  ];
+
+  const songsList = [
+    'LA Chill Tour',
+    'LA Fusion Jam',
+    'This is it band'
+  ];
+
+  let i = 0;
+  function next() {
+    if (i >= songs.length - 1) {
+      i = 0;
+    } else {
+      i++;
+    }
+    stop()
+    player.src = songs[i];
+    title.title = songsList[i];
+  }
+
+  function back() {
+    if (i <= 0) {
+      i = songs.length - 1;
+    } else {
+      i--;
+    }
+    stop();
+    player.src = songs[i];
+    title.title = songsList[i];
+  }
+
+  function stop() {
+    onOff.classList.remove('play');
+    player.pause();
+    player.currentTime = 0;
+  }
+
+  document.getElementsByClassName('next')[0].onclick = next;
+  document.getElementsByClassName('back')[0].onclick = back;
+  controls.getElementsByClassName('playstate')[0].onclick = () => {
+    if (player.paused) {
+      onOff.classList.add('play');
+      player.play();
+    } else {
+      onOff.classList.remove('play');
+      player.pause();
+    }
+  };
+  controls.getElementsByClassName('stop')[0].onclick = stop;
+</script>
 </body>
 </html>
