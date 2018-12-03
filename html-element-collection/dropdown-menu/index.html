@@ -15,5 +15,22 @@
       <li><a href="#">Выйти</a></li>
     </ul>
   </div>
+
+<script>
+  const mainMenu = document.getElementsByClassName('wrapper-dropdown')[0];
+  const dropDownMenu = document.getElementsByClassName('dropdown')[0];
+  const menuLinks = dropDownMenu.getElementsByTagName('li');
+
+  function menuDrop() {
+    if (mainMenu.classList.contains('active')) {
+      mainMenu.classList.remove('active');
+    } else {
+      mainMenu.classList.add('active');
+    }
+  }
+  
+  mainMenu.onclick = menuDrop;
+</script>
+
 </body>
 </html>
