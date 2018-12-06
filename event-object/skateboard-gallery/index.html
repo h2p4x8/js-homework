@@ -33,5 +33,31 @@
       <img src="images/thumb/07.jpg" title="EGGBEATER">
     </a>
   </nav>
+<script>
+  const products = document.getElementById('nav').getElementsByTagName('a'); //коллекция ссылок
+  const gallery = document.getElementById('view');
+
+  function deleteDefault(event) {
+    event.preventDefault();
+  }
+
+  function makeCurrent(event) {
+    if (this.classList.contains('gallery-current')) {
+      return;
+    }
+    for (let product of products) {
+      product.classList.remove('gallery-current')
+    }
+
+    this.classList.add('gallery-current');
+    gallery.src = this.href;
+
+  }
+
+  for (let product of products) {
+    product.addEventListener('click', deleteDefault);
+    product.addEventListener('click', makeCurrent);
+  }
+</script>
 </body>
 </html>
