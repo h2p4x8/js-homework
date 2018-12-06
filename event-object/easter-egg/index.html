@@ -45,5 +45,29 @@
       </svg>
     </div>
   </main>
+<script>
+  const secretContent = document.getElementsByClassName('secret')[0];
+
+  let counter = '';
+  function showSecret(event) {
+    if (event.key === 'Control') {
+      counter += 'Ctrl';
+    } else if (event.key === 'Alt') {
+      if (counter === 'Ctrl') {
+        counter += 'Alt';
+      } else {
+        counter = '';
+      }
+    } else if (event.code === 'KeyT') {
+      if (counter === 'CtrlAlt') {
+        secretContent.classList.add('visible');
+      } else {
+        counter = '';
+      }
+    };
+  }
+
+  document.addEventListener('keydown', showSecret);
+</script>
 </body>
 </html>
