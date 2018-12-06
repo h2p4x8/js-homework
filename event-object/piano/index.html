@@ -25,5 +25,80 @@
       <audio src=""></audio>
     </li>
   </ul>
+<script>
+  const piano = document.getElementsByClassName('set')[0];   //пианино
+  const pianoKeys = piano.getElementsByTagName('li'); // коллекция всех клавиш
+  const middleSounds = [
+    'sounds/middle/first.mp3',
+    'sounds/middle/second.mp3',
+    'sounds/middle/third.mp3',
+    'sounds/middle/fourth.mp3',
+    'sounds/middle/fifth.mp3'
+  ];
+  const lowerSounds = [
+    'sounds/lower/first.mp3',
+    'sounds/lower/second.mp3',
+    'sounds/lower/third.mp3',
+    'sounds/lower/fourth.mp3',
+    'sounds/lower/fifth.mp3'
+  ];
+  const higherSounds = [
+    'sounds/higher/first.mp3',
+    'sounds/higher/second.mp3',
+    'sounds/higher/third.mp3',
+    'sounds/higher/fourth.mp3',
+    'sounds/higher/fifth.mp3'
+  ];
+
+  function updateTone() {
+
+    if (piano.classList.contains('middle')) {
+      for(let i = 0; i < pianoKeys.length; i++) {
+        pianoKeys[i].getElementsByTagName('audio')[0].src = middleSounds[i];
+      }
+    } else if (piano.classList.contains('lower')) {
+      for(let i = 0; i < pianoKeys.length; i++) {
+        pianoKeys[i].getElementsByTagName('audio')[0].src = lowerSounds[i];
+      }
+    } else if (piano.classList.contains('higher')){
+      for(let i = 0; i < pianoKeys.length; i++) {
+        pianoKeys[i].getElementsByTagName('audio')[0].src = higherSounds[i];
+      }
+    }
+  }
+
+  function checkTone(event) {
+    if (event.altKey) {
+      piano.classList.remove('middle');
+      piano.classList.remove('lower');
+      if (!piano.classList.contains('higher')) {
+        piano.classList.add('higher');
+      }
+      updateTone();
+    } else if (event.shiftKey) {
+      piano.classList.remove('middle');
+      piano.classList.remove('higher');
+      if (!piano.classList.contains('lower')) {
+        piano.classList.add('lower');
+      }
+      updateTone();
+    } else {
+      piano.classList.remove('lower');
+      piano.classList.remove('higher');
+      if (!piano.classList.contains('middle')) {
+        piano.classList.add('middle');
+      }
+      updateTone();
+    }
+  }
+
+  for (const key of pianoKeys) {
+    const player = key.getElementsByTagName('audio')[0];
+    key.addEventListener('click', checkTone);
+    key.addEventListener('click', () => {
+      player.play();
+    })
+  }
+</script>
 </body>
 </html>
