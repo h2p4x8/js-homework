@@ -44,5 +44,22 @@
       </div>
     </div>
   </div>
+<script>
+  const addButtons = document.getElementsByClassName('add'); //массив все кнопок добавить
+  const counter = document.getElementById('cart-count');
+  const totalPrice = document.getElementById('cart-total-price');
+  let count = 0;
+  let price = 0;
+
+  for (let button of addButtons) {
+    button.addEventListener('click', () => {
+      count ++;
+      counter.innerHTML = count;
+      price += new Number(button.dataset.price);
+
+      totalPrice.innerHTML = getPriceFormatted(price);
+    })
+  }
+</script>
 </body>
 </html>
