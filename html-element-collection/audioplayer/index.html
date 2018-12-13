@@ -65,9 +65,11 @@
     } else {
       i++;
     }
-    stop()
     player.src = songs[i];
     title.title = songsList[i];
+    if (onOff.classList.contains('play')) {
+      play();
+    }
   }
 
   function back() {
@@ -76,9 +78,11 @@
     } else {
       i--;
     }
-    stop();
     player.src = songs[i];
     title.title = songsList[i];
+    if (onOff.classList.contains('play')) {
+      play();
+    }
   }
 
   function stop() {
@@ -87,17 +91,19 @@
     player.currentTime = 0;
   }
 
+  function play() {
+      if (player.paused) {
+        onOff.classList.add('play');
+        player.play();
+      } else {
+        onOff.classList.remove('play');
+        player.pause();
+      }
+  }
+
   document.getElementsByClassName('next')[0].onclick = next;
   document.getElementsByClassName('back')[0].onclick = back;
-  controls.getElementsByClassName('playstate')[0].onclick = () => {
-    if (player.paused) {
-      onOff.classList.add('play');
-      player.play();
-    } else {
-      onOff.classList.remove('play');
-      player.pause();
-    }
-  };
+  controls.getElementsByClassName('playstate')[0].onclick = play;
   controls.getElementsByClassName('stop')[0].onclick = stop;
 </script>
 </body>
