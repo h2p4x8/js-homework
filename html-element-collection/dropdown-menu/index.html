@@ -22,13 +22,9 @@
   const menuLinks = dropDownMenu.getElementsByTagName('li');
 
   function menuDrop() {
-    if (mainMenu.classList.contains('active')) {
-      mainMenu.classList.remove('active');
-    } else {
-      mainMenu.classList.add('active');
-    }
+    mainMenu.classList.toggle('active');
   }
-  
+
   mainMenu.onclick = menuDrop;
 </script>
 
