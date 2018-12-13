@@ -36,9 +36,14 @@
   </ul>
 <script>
   const drum = document.getElementsByClassName('drum-kit__drum');
+  const audioAll = document.getElementsByTagName('audio'); //колл всех аудио
 
   for (let button of drum) {
     button.onclick = () => {
+      for (let audio of audioAll) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
       button.getElementsByTagName('audio')[0].play();
     };
   }
