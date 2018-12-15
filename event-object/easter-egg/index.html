@@ -46,28 +46,90 @@
     </div>
   </main>
 <script>
+'use strict';
+  const secretNav= document.getElementsByTagName('nav')[0];
   const secretContent = document.getElementsByClassName('secret')[0];
 
-  let counter = '';
-  function showSecret(event) {
-    if (event.key === 'Control') {
-      counter += 'Ctrl';
-    } else if (event.key === 'Alt') {
-      if (counter === 'Ctrl') {
-        counter += 'Alt';
-      } else {
-        counter = '';
-      }
-    } else if (event.code === 'KeyT') {
-      if (counter === 'CtrlAlt') {
-        secretContent.classList.add('visible');
-      } else {
-        counter = '';
-      }
-    };
+  function showNav() {
+    if (event.altKey && event.ctrlKey && event.code === 'KeyT') {
+      secretNav.classList.toggle('visible');
+    }
   }
 
-  document.addEventListener('keydown', showSecret);
+  document.addEventListener('keydown', showNav);
+
+  let secret = '';
+  const bindings = {
+    KeyY() {
+      secret += 'n'
+    },
+    KeyT() {
+      if (secret === 'n'){
+        secret += 'e';
+      } else {
+        secret ='';
+      }
+    },
+    KeyN() {
+      if (secret === 'ne'){
+        secret += 't';
+      }  else {
+        secret ='';
+      }
+    },
+    KeyJ() {
+      if (secret === 'net'){
+        secret += 'o';
+      }  else if (secret === 'netol') {
+        secret += 'o';
+      } else {
+        secret ='';
+      }
+    },
+    KeyK() {
+      if (secret === 'neto'){
+        secret += 'l';
+      }  else {
+        secret ='';
+      }
+    },
+    KeyU() {
+      if (secret === 'netolo'){
+        secret += 'g';
+      }  else {
+        secret ='';
+      }
+    },
+    KeyB() {
+      if (secret === 'netolog'){
+        secret += 'i';
+      }  else {
+        secret ='';
+      }
+    },
+    KeyZ() {
+      if (secret === 'netologi'){
+        secret += 'a';
+      }  else {
+        secret ='';
+      }
+    }
+  }
+
+  function secretKey(event) {
+    if (event.code in bindings) {
+      bindings[event.code]();
+    }
+  }
+
+
+  document.addEventListener('keydown', secretKey);
+  document.addEventListener('keydown', () =>{
+    if (secret === 'netologia') {
+      secretContent.classList.add('visible');
+    }
+  });
+
 </script>
 </body>
 </html>
