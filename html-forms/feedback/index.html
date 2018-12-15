@@ -80,7 +80,7 @@
         <textarea name="message" rows="14"></textarea>
   		</label>
   	</fieldset>
-    <button type="submit" class="button-contact" disabled>Отправить сообщение</button>
+    <button  type="submit" class="button-contact" disabled>Отправить сообщение</button>
   </form>
   <main class="hidden" id="output">
     <h2>Ваше сообщение</h2>
@@ -93,5 +93,51 @@
   </main>
 
   <script src="https://use.fontawesome.com/70378a66b8.js"></script>
+  <script>
+    const form = document.getElementsByClassName('contentform')[0];
+    const inputs = Array.from(form.getElementsByTagName('input'));
+    const feedback = document.getElementById('output');
+    const outputs = Array.from(feedback.getElementsByTagName('output'));
+    const buttons = Array.from(document.getElementsByClassName('button-contact'));
+    const messageText = form.getElementsByTagName('textarea')[0];
+    inputs.push(messageText);
+
+    function updateFeedback() {
+      try {
+        let result = outputs.find(el => el.id === this.name);
+        result.value = this.value;
+          for (let input of inputs){
+          if (input.value === '') {
+            buttons.find(el => el.type === 'submit').disabled = true;
+            return;
+          }
+        }
+
+        buttons.find(el => el.type === 'submit').disabled = false;
+      } catch(e) {
+        return;
+      }
+    }
+
+    function checkNum() {
+      if (this.value.match(/[^0-9]/g)) {
+        this.value = this.value.replace(/[^0-9]/g, '');
+      }
+    }
+
+
+    for (let input of inputs) {
+      input.addEventListener('change', updateFeedback);
+    };
+    inputs.find(el => el.name === 'zip').addEventListener('input', checkNum);
+    for (let button of buttons) {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        form.classList.toggle('hidden');
+        feedback.classList.toggle('hidden')
+      });
+    }
+
+  </script>
 </body>
 </html>
