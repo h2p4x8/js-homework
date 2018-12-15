@@ -18,5 +18,54 @@
   </main>
 
   <div id="loader" class="hidden">Загрузка...</div>
+<script>
+  'use strict';
+
+  let xhr = new XMLHttpRequest();
+  const loader = document.getElementById('loader');
+  const content = document.getElementById('content');
+  const source = document.getElementById('source');
+  const from = document.getElementById('from');
+  const result = document.getElementById('result');
+  const to = document.getElementById('to');
+
+
+  xhr.open("GET", 'https://neto-api.herokuapp.com/currency');
+  xhr.send();
+  let converter = [];
+  xhr.addEventListener("load", () => {
+    converter = JSON.parse(xhr.responseText);
+    for (let i = 0; i < converter.length; i++) {
+      to.innerHTML += '<option></option>';
+      from.innerHTML += '<option></option>';
+      to.getElementsByTagName('option')[i].value= converter[i].code;
+      to.getElementsByTagName('option')[i].innerHTML = converter[i].code;
+      from.getElementsByTagName('option')[i].value = converter[i].code;
+      from.getElementsByTagName('option')[i].innerHTML = converter[i].code;
+    }
+  });
+  xhr.addEventListener("loadstart", () => {
+      loader.classList.remove('hidden');
+  });
+  xhr.addEventListener("loadend", () => {
+      loader.classList.add('hidden');
+      content.classList.remove('hidden');
+  });
+
+  function convert() {
+    console.log(from.value);
+    console.log(to.value);
+    console.log(source.value);
+    let convertFrom = converter.find(el => el.code === from.value);
+    console.log(convertFrom);
+    let convertTo = converter.find(el => el.code === to.value);
+    result.value = source.value * convertFrom.value / convertTo.value;
+  }
+
+  source.addEventListener('change', convert)
+  from.addEventListener('change', convert);
+  to.addEventListener('change', convert)
+
+</script>
 </body>
 </html>
