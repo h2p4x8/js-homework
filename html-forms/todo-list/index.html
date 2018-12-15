@@ -29,5 +29,25 @@
     </ul>
     <h3>Выполнено задач: <output></output></h3>
   </fieldset>
+<script>
+  const list = document.getElementsByClassName('list-block')[0];
+  const checkList = list.getElementsByTagName('input');
+  const listResult = list.getElementsByTagName('output')[0];
+
+  function updateResult() {
+    let checked = Array.from(checkList).filter(el => el.checked);
+    if (checked.length === checkList.length) {
+      list.classList.add('complete');
+    } else {
+      list.classList.remove('complete');
+    }
+    listResult.value = `${checked.length} из ${checkList.length}`
+  }
+
+  document.addEventListener('DOMContentLoaded', updateResult);
+  for (let pos of checkList) {
+    pos.addEventListener('click', updateResult);
+  }
+</script>
 </body>
 </html>
