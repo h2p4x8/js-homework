@@ -4,8 +4,10 @@ const tabsNav = document.querySelector('.tabs-nav'),
       tabsContent = document.querySelector('.tabs-content'),
       articles = Array.from(tabsContent.children);
 
-document.addEventListener('DOMContentLoaded', makeTabs);
-Array.from(tabsNav.children).forEach(el => el.addEventListener('click', makeActiv));
+makeTabs()
+Array
+  .from(tabsNav.children)
+  .forEach(el => el.addEventListener('click', makeActiv));
 
 function makeTabs() {
     const demoTab = tabsNav.firstElementChild;
@@ -18,7 +20,6 @@ function makeTabs() {
       let tab = demoTab.cloneNode(true);
       tabsNav.appendChild(tab)
     }
-
     tabsNav.removeChild(demoTab);
     tabsNav.firstElementChild.classList.add('ui-tabs-active');
     tabsContent.firstElementChild.classList.remove('hidden')
