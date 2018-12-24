@@ -6,55 +6,35 @@ function slider(container) {
   slides.firstElementChild.classList.add('slide-current');
 
 
-  const next = navButton.find( el => el.dataset.action === 'next');
-  next.addEventListener('click', event => moveSlider(true))
-  const prev = navButton.find( el => el.dataset.action === 'prev');
-  prev.addEventListener('click', event => moveSlider(false))
-  const first = navButton.find( el => el.dataset.action === 'first');
-  first.addEventListener('click', event => moveTo(true))
-  const last = navButton.find( el => el.dataset.action === 'last');
-  last.addEventListener('click', event => moveTo(false))
-  navButton.forEach(el => el.addEventListener('click', checkSlide))
-
-
-  function moveSlider(isForward) {
+  const next = document.querySelector(`a[data-action='next']`);
+  const prev = document.querySelector(`a[data-action='prev']`);
+  const first = document.querySelector(`a[data-action='first']`);
+  const last = document.querySelector(`a[data-action='last']`);
+  navButton.forEach(el => el.addEventListener('click', () => {
+    moveSlider();
+    checkSlide();
+  }));
+  function moveSlider() {
       const currentSlide = container.querySelector('.slide-current');
       let activatedSlide = undefined;
-      if (!currentSlide.nextElementSibling&&isForward) {
+      console.log(event.target)
+      if (!currentSlide.nextElementSibling && event.target.dataset.action === 'next'|| event.target.dataset.action === 'last') {
         activatedSlide = slides.lastElementChild;
-      } else if (!currentSlide.previousElementSibling&&!isForward) {
+      } else if (!currentSlide.previousElementSibling && event.target.dataset.action === 'prev' || event.target.dataset.action === 'first') {
         activatedSlide = slides.firstElementChild;
       } else {
-        activatedSlide = isForward ? currentSlide.nextElementSibling : currentSlide.previousElementSibling;
+        activatedSlide = event.target.dataset.action === 'next' ? currentSlide.nextElementSibling : currentSlide.previousElementSibling;
       }
       currentSlide.classList.remove('slide-current');
       activatedSlide.classList.add('slide-current');
-    }
-
-  function moveTo(isForward) {
-    const currentSlide = container.querySelector('.slide-current');
-    const activatedSlide = isForward ? slides.firstElementChild : slides.lastElementChild;
-
-    currentSlide.classList.remove('slide-current');
-    activatedSlide.classList.add('slide-current');
   }
 
   function checkSlide() {
     const currentSlide = container.querySelector('.slide-current');
-    if (currentSlide.nextElementSibling&&currentSlide.previousElementSibling) {
-      navButton.forEach(el => el.classList.remove('disabled'))
-      return;
-    } else if (!currentSlide.nextElementSibling) {
-      last.classList.add('disabled');
-      next.classList.add('disabled');
-      first.classList.remove('disabled');
-      prev.classList.remove('disabled');
-    } else if (!currentSlide.previousElementSibling) {
-      first.classList.add('disabled');
-      prev.classList.add('disabled');
-      last.classList.remove('disabled');
-      next.classList.remove('disabled');
-    }
+    next.classList.toggle('disabled', !currentSlide.nextElementSibling);
+    last.classList.toggle('disabled', !currentSlide.nextElementSibling);
+    prev.classList.toggle('disabled', !currentSlide.previousElementSibling);
+    first.classList.toggle('disabled', !currentSlide.previousElementSibling);
   }
 }
 
